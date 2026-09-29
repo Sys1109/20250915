@@ -2,10 +2,9 @@
 
 void process_wait(void)
 {
-	pid_t wpid;
-	int status;
-	while((wpid = wait(&status)) > 0)
+	pid_t zpid;
+	while((zpid = wait(NULL)) > 0)
 	{
-		printf("child process %d\n",wpid);	
+		printf("Parent wait child success , zpid  %d\n",zpid);	
 	}
 }

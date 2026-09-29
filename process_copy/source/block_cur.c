@@ -2,19 +2,12 @@
 
 int block_cur(const char *srcfile,int pronum)
 {
-	struct stat st;
-	if(stat(srcfile, &st) == -1)
-	{
-		perror("stat fail");
-		return -1;
-	}
-	off_t filesize = st.st_size;
-	if(filesize % pronum == 0)
-	{
-		return filesize / pronum;	
-	}
+	int fsize;
+	int fd = open(srcfile,O_RDONLY);
+	fsize = lseek(fd,0,SEEK_END);
+	
+	if(fsize % pronum==0)
+		return fsize / pronum;
 	else
-	{
-		return filesize / pronum + 1;	
-	}
+		return fsize / pronum +1;
 }
